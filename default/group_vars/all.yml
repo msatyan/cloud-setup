@@ -1,0 +1,39 @@
+# Path to the Inventory hosts file
+# It should be auto generated during the creating of VM inctances
+cloud_inventory_file: '{{ inventory_dir }}/hosts'
+
+# It will be used as DNS discovering.
+# Nodes will be discoverable under <node-name>.<clustername>.<domainname>., e.g.
+# my-node.cluster-dev.net
+cloud_domain_name: net
+cloud_cluster_name: cluster-dev
+cloud_cluster_domain: '{{ k8s_cluster_name }}.{{ k8s_domain_name }}'
+
+# List of groups with VM instance names and machine types
+# Instance groups let you organize VM instances or use them
+# in a load-balancing backend service
+# Nodes contain comma separated list of instance names.
+# Names must start with a lowercase letter followed by up to 63 lowercase letters,
+# numbers, or hyphens, and cannot end with a hyphen
+cloud_providers:
+- name: cloudstack
+  zone: zone01.ams00
+  type: standard-2g-2cpu
+  image: centos-7-docker-50
+  nodes:
+  - node-001
+  - node-002
+- name: gce
+  zone: europe-west1-b
+  type: n1-standard-1
+  image: centos-7
+  nodes:
+  - node-101
+  - node-102
+- name: aws
+  zone: eu-west-1a
+  type: t2.medium
+  image: centos-7
+  nodes:
+  - node-201
+  - node-202

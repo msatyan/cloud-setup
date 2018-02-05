@@ -1,0 +1,6 @@
+---
+# GCE instance provider tasks
+
+- name: GCE - create VM
+  debug:
+    var: instance_provider

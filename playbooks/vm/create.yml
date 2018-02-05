@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  pre_tasks:
+  - name: Check inventory hosts file
+    stat:
+      path: '{{ cloud_inventory_file }}'
+    register: st
+  - name: Create inventory hosts file from template
+    template:
+      src: inventory.j2
+      dest: '{{ cloud_inventory_file }}'
+    when: not st.stat.exists
+  tasks:
+  - debug:
+      var: inventory_file
+  - name: Create VM instances
+    include_role:
+      name: instance
+    vars:
+      instance_provider: '{{ cloud_provider.name }}'
+      instance_nodes: '{{ cloud_provider.nodes }}'
+      instance_type: '{{ cloud_provider.type }}'
+      instance_image: '{{ cloud_provider.image }}'
+    with_items: '{{ cloud_providers }}'
+    loop_control:
+      loop_var: cloud_provider

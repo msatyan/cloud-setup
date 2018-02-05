@@ -1,0 +1,6 @@
+---
+# Cloudstack instance provider tasks
+
+- name: Cloudstack - create VM
+  debug:
+    var: instance_provider

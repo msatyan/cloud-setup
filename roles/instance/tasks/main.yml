@@ -1,0 +1,6 @@
+---
+# tasks file for instance
+
+- name: Use cloud provider specific task
+  include_tasks: '{{ instance_provider }}.yml'
+  when: instance_provider is defined and (instance_provider == "gce" or instance_provider == "aws" or instance_provider == "cloudstack")

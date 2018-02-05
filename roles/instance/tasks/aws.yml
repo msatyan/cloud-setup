@@ -1,0 +1,6 @@
+---
+# AWS instance provider tasks
+
+- name: AWS - create VM
+  debug:
+    var: instance_provider
