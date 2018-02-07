@@ -41,20 +41,28 @@ Names must start with a lowercase letter followed by up to 63 lowercase letters,
 numbers, or hyphens, and cannot end with a hyphen
 ```yaml
 cloud_providers:
-- name: gce
-  zone: europe-west1-b
-  type: n1-standard-1
-  image: centos-7
-  nodes:
-  - node-101
-  - node-102
-- name: aws
-  zone: eu-west-1a
-  type: t2.medium
-  image: centos-7
-  nodes:
-  - node-201
-  - node-202
+  - name: gce
+    zone: europe-west1-b
+    domain: cluster-dev.net
+    type: n1-standard-1
+    image: centos-7
+    metadata:
+      ssh_key: keydata
+      timezone: Europe/Amsterdam
+    nodes:
+      - node-101
+      - node-102
+  - name: aws
+    zone: eu-west-1a
+    domain: cluster-dev.net
+    type: t2.medium
+    image: centos-7
+    metadata:
+      ssh_key: keydata
+      timezone: Europe/Amsterdam
+    nodes:
+      - node-201
+      - node-202
 ```
 
 ## Users and services credentials
