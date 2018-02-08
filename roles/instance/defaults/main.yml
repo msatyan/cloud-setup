@@ -1,6 +1,9 @@
 ---
 # defaults file for instance
 
+# It will be used as DNS discovering.
+instance_domain: cluster-dev.net
+
 # Default instance provider (Google Compute Engine)
 instance_provider: gce
 
@@ -14,7 +17,7 @@ instance_nodes: {}
 # A zone is an isolated location within a region.
 # Resources that live in a zone, such as instances,
 # are referred to as zonal resources
-instances_zone: europe-west1-b
+instance_zone: europe-west1-b
 
 # Predefined machine type which managed by cloud provider:
 instance_type: n1-standard-1
@@ -22,3 +25,21 @@ instance_type: n1-standard-1
 # Each instance requires a disk to boot from.
 # Specify an image when you create an instance.
 instance_image: centos-7
+
+# ----------------------------
+# Cloud specific defaults
+# ----------------------------
+
+# User data or metadata that specified additional cloud configuration
+instance_metadata: {}
+
+# ----------------------------
+# Cloudstack specific defaults
+# ----------------------------
+
+# Cloudstack account
+cloudstack_account: cloudstack
+
+# Cloudstack hypervisor type
+cloudstack_hypervisor: KVM
+
