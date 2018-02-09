@@ -20,6 +20,17 @@ Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
+Path to the Inventory hosts file
+It should be auto generated during the creating of VM inctances
+```yaml
+cloud_inventory_file: '{{ inventory_dir }}/hosts'
+```
+
+It will be used as DNS discovering.
+```yaml
+instance_domain: cluster-dev.net
+```
+
 Default instance provider (Google Compute Engine)
 ```yaml
 instance_provider: gce
@@ -51,6 +62,28 @@ Specify an image when you create an instance.
 ```yaml
 instance_image: centos-7
 ```
+
+Cloud specific defaults
+-----------------------
+
+User data or metadata that specified additional cloud configuration
+```yaml
+instance_metadata: {}
+```
+
+Cloudstack specific defaults
+----------------------------
+
+Cloudstack account
+```yaml
+cloudstack_account: cloudstack
+```
+
+Cloudstack hypervisor type
+```yaml
+cloudstack_hypervisor: KVM
+```
+
 
 Example Playbook
 ----------------

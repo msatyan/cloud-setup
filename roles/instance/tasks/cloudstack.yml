@@ -2,5 +2,33 @@
 # Cloudstack instance provider tasks
 
 - name: Cloudstack - create VM
-  debug:
-    var: instance_provider
+  cs_instance:
+    display_name: '{{ item }}'
+    template: '{{ instance_image }}'
+    service_offering: '{{ instance_type }}'
+    hypervisor: '{{ cloudstack_hypervisor }}'
+    zone: '{{ instance_zone }}'
+    api_region: '{{ cloudstack_account }}'
+    affinity_groups: '{{ instance_metadata["affinity_groups"] | default([], true) }}'
+    ssh_key: '{{ instance_metadata["ssh_key"] | default("superuser") }}'
+    user_data: |
+      #cloud-config
+      manage_etc_hosts: true
+      fqdn: {{ item }}.{{ instance_domain }}
+      hastname: {{ item }}
+      timezone: {{ instance_metadata["timezone"] | default("CET") }}
+  delegate_to: localhost
+  register: cloudstack_state
+  with_items: '{{ instance_nodes }}'
+
+- name: Wait for SSH to come up
+  wait_for:
+    host: '{{ item.default_ip }}'
+    port: 22
+  with_items: '{{ cloudstack_state.results | default([], true) }}'
+
+- lineinfile:
+    dest: '{{ cloud_inventory_file }}'
+    insertafter: "^\\[{{ instance_provider }}\\]" 
+    line: '{{ item.display_name }} ansible_host={{ item.default_ip  }}'
+  with_items: '{{ cloudstack_state.results | default([], true) }}'
