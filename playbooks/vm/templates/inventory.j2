@@ -4,8 +4,5 @@ localhost
 
 {% for item in cloud_providers %}
 [{{ item.name }}]
-{% for node in item.nodes %}
-{{ node }}
-{% endfor %}
 
 {% endfor %}
