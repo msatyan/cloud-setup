@@ -1,6 +1,10 @@
 ---
 # defaults file for instance
 
+# Path to the Inventory hosts file
+# It should be auto generated during the creating of VM inctances
+cloud_inventory_file: '{{ inventory_dir }}/hosts'
+
 # It will be used as DNS discovering.
 instance_domain: cluster-dev.net
 
