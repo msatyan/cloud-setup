@@ -2,6 +2,11 @@
 # It should be auto generated during the creating of VM inctances
 cloud_inventory_file: '{{ inventory_dir }}/hosts'
 
+# Account name of remote user. Ansible will use this user account to ssh into
+# the managed machines. The user must be able to use sudo without asking
+# for password
+cloud_ssh_user: devops
+
 # List of groups with VM instance names and machine types
 # Instance groups let you organize VM instances or use them
 # in a load-balancing backend service
