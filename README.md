@@ -33,6 +33,29 @@ TODO
 
 Available variables are listed below, along with default values (see `default/group_vars/all.yml`):
 
+Path to the Inventory hosts file
+It should be auto generated during the creating of VM inctances
+```yaml
+cloud_inventory_file: '{{ inventory_dir }}/hosts'
+```
+
+Account name of remote user. Ansible will use this user account to ssh into
+the managed machines. The user must be able to use sudo without asking for password
+```yaml
+cloud_ssh_user: devops
+```
+
+Account name of remote user. The user must be able to use sudo without asking
+for password for some utils e.g. (tcpdump, docker)
+```yaml
+cloud_dev_ssh_user: dev
+```
+
+List of IPs which allowed to connect via ssh by `cloud_ssh_user`
+```yaml
+cloud_ssh_allowed_ips: {}
+```
+
 List of groups with VM instance names and machine types
 Instance groups let you organize VM instances or use them
 in a load-balancing backend service

@@ -7,6 +7,13 @@ cloud_inventory_file: '{{ inventory_dir }}/hosts'
 # for password
 cloud_ssh_user: devops
 
+# Account name of remote user. The user must be able to use sudo without asking
+# for password for some utils e.g. (tcpdump, docker)
+cloud_dev_ssh_user: dev
+
+# List of IPs which allowed to connect via ssh by `cloud_ssh_user`
+cloud_ssh_allowed_ips: {}
+
 # List of groups with VM instance names and machine types
 # Instance groups let you organize VM instances or use them
 # in a load-balancing backend service
