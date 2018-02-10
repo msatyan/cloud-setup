@@ -17,7 +17,6 @@
       fqdn: {{ item }}.{{ instance_domain }}
       hastname: {{ item }}
       timezone: {{ instance_metadata["timezone"] | default("CET") }}
-  delegate_to: localhost
   register: cloudstack_state
   with_items: '{{ instance_nodes }}'
 
@@ -32,3 +31,5 @@
     insertafter: "^\\[{{ instance_provider }}\\]" 
     line: '{{ item.display_name }} ansible_host={{ item.default_ip  }}'
   with_items: '{{ cloudstack_state.results | default([], true) }}'
+  notify:
+    - remove localhost

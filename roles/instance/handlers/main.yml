@@ -1,2 +1,8 @@
 ---
 # handlers file for instance
+
+- name: remove localhost
+  lineinfile:
+    dest: '{{ cloud_inventory_file }}'
+    regexp: '^localhost'
+    state: absent
