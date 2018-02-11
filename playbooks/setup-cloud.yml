@@ -1,1 +1,1 @@
-- import_playbook: setup/update.yml
+- import_playbook: setup/permisssions.yml
