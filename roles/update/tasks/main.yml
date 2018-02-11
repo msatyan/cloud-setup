@@ -1,0 +1,11 @@
+---
+# tasks file for update
+
+- name: Update CentOS packages
+  yum:
+    name: '*'
+    state: latest
+  notify:
+    - reboot vps
+    - wait to come up
+  when: ansible_distribution == 'CentOS'
