@@ -1,12 +1,23 @@
 ---
 - hosts: all:!localhost
-  remote_user: '{{ cloud_ssh_user }}'
+  remote_user: '{{ cloud_ssh_superuser }}'
   become: true
 
   roles:
     - role: permissions
-      permissions_users:
-        - name: '{{ cloud_ssh_user }}'
+      addmission_group:
+        - name: '{{ cloud_ssh_superuser }}'
           ips: '{{ cloud_ssh_allowed_ips }}'
-        - name: '{{ cloud_dev_ssh_user }}'
-          ips: '{{ cloud_ssh_allowed_ips }}'
+
+  tasks:
+
+    - name: Add permissions for specified users
+      include_role:
+        name: permissions
+      vars:
+        addmission_group:
+          - name: '{{ cloud_ssh_user.name }}'
+            ips: '{{ cloud_ssh_allowed_ips }}'
+      with_items: '{{ cloud_ssh_users }}'
+      loop_control:
+        loop_var: cloud_ssh_user

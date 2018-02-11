@@ -1,13 +1,13 @@
 ---
 # tasks file for permissions
 
-- name: Add ssh permissions for specified users and allowed hosts
+- name: Add ssh access for specified users and allowed hosts
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "^AllowUsers {{ item.0.name }}@{{ item.1 }}"
     line: "AllowUsers {{ item.0.name }}@{{ item.1 }}"
   with_subelements:
-    - "{{ permissions_users }}"
+    - "{{ addmission_group }}"
     - ips
   notify:
     - restart sshd

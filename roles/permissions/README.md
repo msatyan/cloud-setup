@@ -15,9 +15,9 @@ Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-Add ssh permissions for specified users and allowed hosts
+Add ssh access for specified users and allowed hosts
 ```yaml
-permissions_users: {}
+addmission_group: {}
 ```
 
 Example Playbook
@@ -28,7 +28,7 @@ Example Playbook
 	  become: true
       roles:
         - role: permissions
-	      permissions_users:
+	      addmission_group:
 	        - name: devops
 	          ips:
 	            - 1.1.1.1

@@ -1,9 +1,10 @@
 ---
 # defaults file for permissions
 
-# Add ssh permissions for specified users and allowed hosts
-# Example
-# permissions_users:
+# Add ssh access for specified users and allowed hosts
+# E.g.
+#
+# addmission_group:
 #   - name: devops
 #     ips:
 #       - 1.1.1.1
@@ -11,4 +12,4 @@
 #   - name: dev
 #     ips:
 #       - 3.3.3.3
-permissions_users: {}
+addmission_group: {}
