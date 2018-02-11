@@ -3,21 +3,10 @@
   remote_user: '{{ cloud_ssh_user }}'
   become: true
 
-  tasks:
-
-  - name: Added ssh permissions for allowed hosts
-    lineinfile:
-      dest: /etc/ssh/sshd_config
-      regexp: "^AllowUsers {{ cloud_ssh_user }}@{{ item }}"
-      line: "AllowUsers {{ cloud_ssh_user }}@{{ item }}"
-    with_items:
-      - "{{ cloud_ssh_allowed_ips }}"
-    notify:
-      - restart sshd
-
-  handlers:
-
-    - name: restart sshd
-      service:
-        name: sshd
-        state: restarted
+  roles:
+    - role: permissions
+      permissions_users:
+        - name: '{{ cloud_ssh_user }}'
+          ips: '{{ cloud_ssh_allowed_ips }}'
+        - name: '{{ cloud_dev_ssh_user }}'
+          ips: '{{ cloud_ssh_allowed_ips }}'

@@ -1,0 +1,14 @@
+---
+# defaults file for permissions
+
+# Add ssh permissions for specified users and allowed hosts
+# Example
+# permissions_users:
+#   - name: devops
+#     ips:
+#       - 1.1.1.1
+#       - 2.2.2.2
+#   - name: dev
+#     ips:
+#       - 3.3.3.3
+permissions_users: {}
