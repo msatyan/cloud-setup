@@ -2,7 +2,9 @@
 - hosts: localhost
   connection: local
   gather_facts: false
+
   pre_tasks:
+
     - name: Check inventory hosts file
       stat:
         path: '{{ cloud_inventory_file }}'
@@ -12,7 +14,9 @@
         src: inventory.j2
         dest: '{{ cloud_inventory_file }}'
       when: not st.stat.exists
+
   tasks:
+
     - name: Create VM instances
       include_role:
         name: instance
