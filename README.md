@@ -42,16 +42,20 @@ cloud_inventory_file: '{{ inventory_dir }}/hosts'
 Account name of remote user. Ansible will use this user account to ssh into
 the managed machines. The user must be able to use sudo without asking for password
 ```yaml
-cloud_ssh_user: devops
+cloud_ssh_superuser: devops
 ```
 
-Account name of remote user. The user must be able to use sudo without asking
+Account names of remote users. The users must be able to use sudo without asking
 for password for some utils e.g. (tcpdump, docker)
 ```yaml
-cloud_dev_ssh_user: dev
+cloud_ssh_users:
+  - names: dev
+    sudoers:
+      - /usr/bin/docker
+      - /usr/bin/tcpdump
 ```
 
-List of IPs which allowed to connect via ssh by `cloud_ssh_user`
+List of IPs which allowed to connect via ssh
 ```yaml
 cloud_ssh_allowed_ips: {}
 ```
