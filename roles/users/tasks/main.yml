@@ -22,54 +22,26 @@
   when: item.home is defined and item.home != ''
   with_items: '{{ users_data }}'
 
-- name: Setup admin sudoers
-  template:
-    src: admin-sudoers.j2
-    dest: /etc/sudoers.d/17-{{ item.name }}
-    mode: 0440
-  when: item.admin is defined and item.admin
-  with_items: '{{ users_data }}'
-
 - name: Setup sudoers
   template:
-    src: sudoers.j2
-    dest: /etc/sudoers.d/18-{{ item.name }}
+    src: '{% if item.admin is defined and item.admin %}admin-{% endif %}sudoers.j2'
+    dest: /etc/sudoers.d/1{% if item.admin is defined and item.admin %}7{% else%}8{% endif %}-{{ item.name }}
     mode: 0440
-  when: item.admin is not defined or not item.admin
   with_items: '{{ users_data }}'
 
-- name: Added bashrc data for custom home dir
+- name: Added bashrc data
   lineinfile:
-    dest: '{{ item.0.home }}/.bashrc'
+    dest: '{% if item.0.home is defined and item.0.home != "" %}{{ item.0.home }}{% else %}/home/{{ item.0.name }}{% endif %}/.bashrc'
     regexp: '^{{ item.1 }}'
     line: '{{ item.1 }}'
-  when: item.0.home is defined and item.0.home != '' 
   with_subelements:
     - '{{ users_data }}'
     - bashrc
+    - skip_missing: yes
 
-- name: Added bashrc data for standard home dir
+- name: Command line prompt
   lineinfile:
-    dest: /home/{{ item.0.name }}/.bashrc
-    regexp: '^{{ item.1 }}'
-    line: '{{ item.1 }}'
-  when: item.0.home is not defined or item.0.home == '' 
-  with_subelements:
-    - '{{ users_data }}'
-    - bashrc
-
-- name: Command line prompt for custom home dir
-  lineinfile:
-    dest: "{{ item.home }}/.bashrc"
+    dest: '{% if item.home is defined and item.home != "" %}{{ item.home }}{% else %}/home/{{ item.name }}{% endif %}/.bashrc'
     regexp: "^PS1="
     line: 'PS1="\n\[\e[32;1m\](\[\e[36;1m\]\t\[\e[32;1m\])-(\[\e[37;1m\]\u @ \H\[\e[32;1m\])-(\[\e[33;1m\]\w\[\e[32;1m\])\n$ \[\e[0m\]"'
-  when: item.home is defined and item.home != '' 
-  with_items: '{{ users_data }}'
-
-- name: Command line prompt for standard home dir
-  lineinfile:
-    dest: /home/{{ item.name }}/.bashrc
-    regexp: "^PS1="
-    line: 'PS1="\n\[\e[32;1m\](\[\e[36;1m\]\t\[\e[32;1m\])-(\[\e[37;1m\]\u @ \H\[\e[32;1m\])-(\[\e[33;1m\]\w\[\e[32;1m\])\n$ \[\e[0m\]"'
-  when: item.home is not defined or item.home == '' 
   with_items: '{{ users_data }}'
