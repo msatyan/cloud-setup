@@ -45,6 +45,7 @@ in a load-balancing backend service
 Nodes contain comma separated list of instance names.
 Names must start with a lowercase letter followed by up to 63 lowercase letters,
 numbers, or hyphens, and cannot end with a hyphen
+
 Example of setup cloud providers:
 ```yaml
 cloud_providers:
@@ -74,6 +75,7 @@ cloud_providers:
 
 Account name of user who initialize VM. Ansible will use this user account to ssh into
 the managed machines. The user must be able to use sudo without asking for password
+
 Example of define an admin user
 ```yaml
 cloud_ssh_superuser: devops
@@ -81,6 +83,7 @@ cloud_ssh_superuser: devops
 
 List of users who can able to connect via ssh. The users must be able to use sudo without asking
 for password for some utils e.g. (tcpdump, docker)
+
 Example of setup ssh users:
 ```yaml
 cloud_ssh_users:
@@ -110,6 +113,7 @@ cloud_ssh_users:
 ```
 
 List of IPs which allowed to connect via ssh.
+
 Example of define allowed IPs:
 ```yaml
 cloud_ops_allowed_ips:
@@ -118,6 +122,7 @@ cloud_ops_allowed_ips:
 ```
 
 List of firewall zones that contain allowed/denied ports and services.
+
 Example of setup firewall zones:
 ```yaml
 firewall_zones:
