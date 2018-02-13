@@ -88,9 +88,9 @@ cloudstack_hypervisor: KVM
 Example Playbook
 ----------------
 
-	- hosts: localhost
-	  remote_user: initcloud
-	  become: true
+    - hosts: localhost
+      remote_user: initcloud
+      become: true
 
       roles:
         - instance

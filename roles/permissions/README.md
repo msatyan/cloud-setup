@@ -23,20 +23,20 @@ addmission_group: {}
 Example Playbook
 ----------------
 
-	- hosts: all:!localhost
-	  remote_user: initcloud
-	  become: true
+    - hosts: all:!localhost
+      remote_user: initcloud
+      become: true
 
       roles:
         - role: permissions
-	      addmission_group:
-	        - name: devops
-	          ips:
-	            - 1.1.1.1
-	            - 2.2.2.2
-	        - name: dev
-	          ips:
-	            - 3.3.3.3
+          addmission_group:
+            - name: devops
+              ips:
+                - 1.1.1.1
+                - 2.2.2.2
+            - name: dev
+              ips:
+                - 3.3.3.3
 
 License
 -------

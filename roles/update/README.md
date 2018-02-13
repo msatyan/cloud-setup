@@ -19,9 +19,9 @@ Available variables are listed below, along with default values (see `defaults/m
 Example Playbook
 ----------------
 
-	- hosts: all:!localhost
-	  remote_user: initcloud
-	  become: true
+    - hosts: all:!localhost
+      remote_user: initcloud
+      become: true
 
       roles:
         - update
