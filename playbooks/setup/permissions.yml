@@ -1,12 +1,12 @@
 ---
 - hosts: all:!localhost
-  remote_user: '{{ cloud_ssh_superuser }}'
+  remote_user: '{{ cloud_ops_superuser }}'
   become: true
 
   roles:
     - role: permissions
       addmission_group:
-        - name: '{{ cloud_ssh_superuser }}'
+        - name: '{{ cloud_ops_superuser }}'
           ips: '{{ cloud_ops_allowed_ips }}'
 
   tasks:
@@ -16,8 +16,8 @@
         name: permissions
       vars:
         addmission_group:
-          - name: '{{ cloud_ssh_user.name }}'
+          - name: '{{ cloud_ops_user.name }}'
             ips: '{{ cloud_ops_allowed_ips }}'
-      with_items: '{{ cloud_ssh_users }}'
+      with_items: '{{ cloud_ops_users }}'
       loop_control:
-        loop_var: cloud_ssh_user
+        loop_var: cloud_ops_user

@@ -78,15 +78,15 @@ the managed machines. The user must be able to use sudo without asking for passw
 
 Example of define an admin user
 ```yaml
-cloud_ssh_superuser: devops
+cloud_ops_superuser: devops
 ```
 
-List of users who can able to connect via ssh. The users must be able to use sudo without asking
-for password for some utils e.g. (tcpdump, docker)
+List of users who can able to manage system and develop software.
+The users must be able to use sudo without asking for password for some utils e.g. (tcpdump, docker)
 
 Example of setup ssh users:
 ```yaml
-cloud_ssh_users:
+cloud_ops_users:
   - name: devops
     admin: true
     bashrc:

@@ -37,13 +37,13 @@ cloud_providers: []
 # Account name of user who initialize VM.
 # Ansible will use this user account to ssh into the managed machines.
 # The user must be able to use sudo without asking for password
-cloud_ssh_superuser: devops
+cloud_ops_superuser: devops
 
-# List of users who can able to connect via ssh.
+# List of users who can able to manage system and develop software.
 # The users must be able to use sudo without asking
 # for password for some utils e.g. (tcpdump, docker)
 # E.g.
-# cloud_ssh_users:
+# cloud_ops_users:
 #   - name: devops
 #     admin: true
 #     bashrc:
@@ -67,7 +67,7 @@ cloud_ssh_superuser: devops
 #       - /usr/bin/cat
 #       - /usr/bin/grep
 #       - /usr/bin/tcpdump
-cloud_ssh_users: []
+cloud_ops_users: []
 
 # List of IPs which allowed to connect via ssh
 # E.g.

@@ -1,7 +1,7 @@
 ---
 # defaults file for users
 
-# List of users who can able to connect via ssh.
+# List of users who can able to nanage system and develop software.
 # One of them may be the user who initialize VM.
 # The users must be able to use sudo without asking
 # for password for some utils e.g. (tcpdump, docker)
