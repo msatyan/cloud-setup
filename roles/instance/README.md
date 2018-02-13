@@ -89,7 +89,9 @@ Example Playbook
 ----------------
 
 	- hosts: localhost
-	  connection: local
+	  remote_user: initcloud
+	  become: true
+
       roles:
         - instance
 

@@ -20,8 +20,9 @@ Example Playbook
 ----------------
 
 	- hosts: all:!localhost
-	  remote_user: devops
+	  remote_user: initcloud
 	  become: true
+
       roles:
         - update
 
