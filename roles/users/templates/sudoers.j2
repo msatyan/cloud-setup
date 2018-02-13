@@ -1,0 +1,5 @@
+# Created by init-cloud
+
+# User rules for {{ item.name }}
+{{ item.name }} ALL=(ALL) NOPASSWD: {{ item.sudoers | join(', ') }}
+Defaults: {{ item.name }} !requiretty

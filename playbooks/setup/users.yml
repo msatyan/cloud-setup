@@ -1,0 +1,8 @@
+---
+- hosts: all:!localhost
+  remote_user: '{{ cloud_ssh_superuser }}'
+  become: true
+
+  roles:
+    - role: users
+      users_data: '{{ cloud_ssh_users }}'

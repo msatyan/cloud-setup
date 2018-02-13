@@ -51,13 +51,21 @@ for password for some utils e.g. (tcpdump, docker)
 cloud_ssh_users:
   - name: devops
     admin: true
+    bashrc:
+      - alias la='ls -la'
+      - alias l='ls -rtFla'
   - name: dev
+    home: /var/www
+    bashrc:
+      - alias la='ls -la'
     sudoers:
       - /usr/bin/docker
       - /usr/bin/ls
       - /usr/bin/cat
       - /usr/bin/grep
   - name: ops
+    bashrc:
+      - alias la='ls -la'
     sudoers:
       - /usr/bin/docker
       - /usr/bin/ls
