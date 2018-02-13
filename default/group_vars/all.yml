@@ -2,6 +2,38 @@
 # It should be auto generated during the creating of VM inctances
 cloud_inventory_file: '{{ inventory_dir }}/hosts'
 
+# List of groups with VM instance names and machine types
+# Instance groups let you organize VM instances or use them
+# in a load-balancing backend service
+# Nodes contain comma separated list of instance names.
+# Names must start with a lowercase letter followed by up to 63 lowercase letters,
+# numbers, or hyphens, and cannot end with a hyphen
+# E.g.
+# cloud_providers:
+#   - name: gce
+#     zone: europe-west1-b
+#     domain: cluster-dev.net
+#     type: n1-standard-1
+#     image: centos-7
+#     metadata:
+#       ssh_key: keydata
+#       timezone: Europe/Amsterdam
+#     nodes:
+#       - node-101
+#       - node-102
+#   - name: aws
+#     zone: eu-west-1a
+#     domain: cluster-dev.net
+#     type: t2.medium
+#     image: centos-7
+#     metadata:
+#       ssh_key: keydata
+#       timezone: Europe/Amsterdam
+#     nodes:
+#       - node-201
+#       - node-202
+cloud_providers: []
+
 # Account name of user who initialize VM.
 # Ansible will use this user account to ssh into the managed machines.
 # The user must be able to use sudo without asking for password
@@ -10,60 +42,56 @@ cloud_ssh_superuser: devops
 # List of users who can able to connect via ssh.
 # The users must be able to use sudo without asking
 # for password for some utils e.g. (tcpdump, docker)
-cloud_ssh_users:
-  - name: devops
-    admin: true
-    bashrc:
-      - alias la='ls -la'
-      - alias l='ls -rtFla'
-  - name: dev
-    home: /var/web
-    bashrc:
-      - alias la='ls -la'
-    sudoers:
-      - /usr/bin/docker
-      - /usr/bin/ls
-      - /usr/bin/cat
-      - /usr/bin/grep
-  - name: ops
-    bashrc:
-      - alias la='ls -la'
-    sudoers:
-      - /usr/bin/docker
-      - /usr/bin/ls
-      - /usr/bin/cat
-      - /usr/bin/grep
-      - /usr/bin/tcpdump
+# E.g.
+# cloud_ssh_users:
+#   - name: devops
+#     admin: true
+#     bashrc:
+#       - alias la='ls -la'
+#       - alias l='ls -rtFla'
+#   - name: dev
+#     home: /var/web
+#     bashrc:
+#       - alias la='ls -la'
+#     sudoers:
+#       - /usr/bin/docker
+#       - /usr/bin/ls
+#       - /usr/bin/cat
+#       - /usr/bin/grep
+#   - name: ops
+#     bashrc:
+#       - alias la='ls -la'
+#     sudoers:
+#       - /usr/bin/docker
+#       - /usr/bin/ls
+#       - /usr/bin/cat
+#       - /usr/bin/grep
+#       - /usr/bin/tcpdump
+cloud_ssh_users: []
 
 # List of IPs which allowed to connect via ssh
+# E.g.
+# cloud_ops_allowed_ips:
+#   - 1.1.1.1
+#   - 2.2.2.2
 cloud_ops_allowed_ips: []
 
-# List of groups with VM instance names and machine types
-# Instance groups let you organize VM instances or use them
-# in a load-balancing backend service
-# Nodes contain comma separated list of instance names.
-# Names must start with a lowercase letter followed by up to 63 lowercase letters,
-# numbers, or hyphens, and cannot end with a hyphen
-cloud_providers:
-  - name: gce
-    zone: europe-west1-b
-    domain: cluster-dev.net
-    type: n1-standard-1
-    image: centos-7
-    metadata:
-      ssh_key: keydata
-      timezone: Europe/Amsterdam
-    nodes:
-      - node-101
-      - node-102
-  - name: aws
-    zone: eu-west-1a
-    domain: cluster-dev.net
-    type: t2.medium
-    image: centos-7
-    metadata:
-      ssh_key: keydata
-      timezone: Europe/Amsterdam
-    nodes:
-      - node-201
-      - node-202
+# List of firewall zones that contain allowed/denied ports and services.
+# E.g.
+# firewall_zones:
+#   - zone: ops
+#     allow: true
+#     ports:
+#       - 2222/tcp
+#     services:
+#       - http
+#       - https
+#       - ssh
+#     sources: '{{ cloud_ops_allowed_ips }}'
+#   - zone: public
+#     allow: false
+#     services:
+#       - http
+#       - https
+#       - ssh
+firewall_zones: []

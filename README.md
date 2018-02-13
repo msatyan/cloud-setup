@@ -39,14 +39,49 @@ It should be auto generated during the creating of VM inctances
 cloud_inventory_file: '{{ inventory_dir }}/hosts'
 ```
 
+List of groups with VM instance names and machine types
+Instance groups let you organize VM instances or use them
+in a load-balancing backend service
+Nodes contain comma separated list of instance names.
+Names must start with a lowercase letter followed by up to 63 lowercase letters,
+numbers, or hyphens, and cannot end with a hyphen
+Example of setup cloud providers:
+```yaml
+cloud_providers:
+  - name: gce
+    zone: europe-west1-b
+    domain: cluster-dev.net
+    type: n1-standard-1
+    image: centos-7
+    metadata:
+      ssh_key: keydata
+      timezone: Europe/Amsterdam
+    nodes:
+      - node-101
+      - node-102
+  - name: aws
+    zone: eu-west-1a
+    domain: cluster-dev.net
+    type: t2.medium
+    image: centos-7
+    metadata:
+      ssh_key: keydata
+      timezone: Europe/Amsterdam
+    nodes:
+      - node-201
+      - node-202
+```
+
 Account name of user who initialize VM. Ansible will use this user account to ssh into
 the managed machines. The user must be able to use sudo without asking for password
+Example of define an admin user
 ```yaml
 cloud_ssh_superuser: devops
 ```
 
 List of users who can able to connect via ssh. The users must be able to use sudo without asking
 for password for some utils e.g. (tcpdump, docker)
+Example of setup ssh users:
 ```yaml
 cloud_ssh_users:
   - name: devops
@@ -74,41 +109,35 @@ cloud_ssh_users:
       - /usr/bin/tcpdump
 ```
 
-List of IPs which allowed to connect via ssh
+List of IPs which allowed to connect via ssh.
+Example of define allowed IPs:
 ```yaml
-cloud_ops_allowed_ips: []
+cloud_ops_allowed_ips:
+  - 1.1.1.1
+  - 2.2.2.2
 ```
 
-List of groups with VM instance names and machine types
-Instance groups let you organize VM instances or use them
-in a load-balancing backend service
-Nodes contain comma separated list of instance names.
-Names must start with a lowercase letter followed by up to 63 lowercase letters,
-numbers, or hyphens, and cannot end with a hyphen
+List of firewall zones that contain allowed/denied ports and services.
+Example of setup firewall zones:
 ```yaml
-cloud_providers:
-  - name: gce
-    zone: europe-west1-b
-    domain: cluster-dev.net
-    type: n1-standard-1
-    image: centos-7
-    metadata:
-      ssh_key: keydata
-      timezone: Europe/Amsterdam
-    nodes:
-      - node-101
-      - node-102
-  - name: aws
-    zone: eu-west-1a
-    domain: cluster-dev.net
-    type: t2.medium
-    image: centos-7
-    metadata:
-      ssh_key: keydata
-      timezone: Europe/Amsterdam
-    nodes:
-      - node-201
-      - node-202
+firewall_zones:
+  - zone: ops
+    allow: true
+    ports:
+      - 2222/tcp
+    services:
+      - http
+      - https
+      - ssh
+    sources:
+      - 1.1.1.1
+      - 2.2.2.2
+  - zone: public
+    allow: false
+    services:
+      - http
+      - https
+      - ssh
 ```
 
 ## Users and services credentials
