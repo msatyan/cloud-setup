@@ -76,9 +76,9 @@ cloud_ssh_users: []
 #   - 2.2.2.2
 cloud_ops_allowed_ips: []
 
-# List of firewall zones that contain allowed/denied ports and services.
+# List of zones that contain allowed/denied ports and services.
 # E.g.
-# firewall_zones:
+# cloud_services_access:
 #   - zone: ops
 #     allow: true
 #     ports:
@@ -94,4 +94,4 @@ cloud_ops_allowed_ips: []
 #       - http
 #       - https
 #       - ssh
-firewall_zones: []
+cloud_services_access: []

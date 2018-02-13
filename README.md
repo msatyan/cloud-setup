@@ -121,11 +121,11 @@ cloud_ops_allowed_ips:
   - 2.2.2.2
 ```
 
-List of firewall zones that contain allowed/denied ports and services.
+List of zones that contain allowed/denied ports and services.
 
-Example of setup firewall zones:
+Example of setup services access:
 ```yaml
-firewall_zones:
+cloud_services_access:
   - zone: ops
     allow: true
     ports:
