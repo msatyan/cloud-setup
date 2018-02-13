@@ -1,0 +1,25 @@
+---
+# defaults file for firewall
+
+# List of firewall zones that contain allowed/denied ports and services.
+#
+# E.g.
+# firewall_zones:
+#   - zone: ops
+#     allow: true
+#     ports:
+#       - 2222/tcp
+#     services:
+#       - http
+#       - https
+#       - ssh
+#     sources:
+#       - 1.1.1.1
+#       - 2.2.2.2
+#   - zone: public
+#     allow: false
+#     services:
+#       - http
+#       - https
+#       - ssh
+firewall_zones: []

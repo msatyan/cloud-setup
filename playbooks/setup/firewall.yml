@@ -1,0 +1,8 @@
+---
+- hosts: all:!localhost
+  remote_user: '{{ cloud_ops_superuser }}'
+  become: true
+
+  roles:
+    - role: firewall
+      firewall_zones: '{{ cloud_services_access }}'

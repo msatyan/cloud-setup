@@ -1,0 +1,51 @@
+---
+# CentOS firewall tasks
+
+- name: Check firewall zones
+  command: firewall-cmd --get-zones
+  register: firewall_get_zones
+
+- name: Setup firewall zones
+  shell: >
+    firewall-cmd --new-zone={{ item.zone }} --permanent && firewall-cmd --reload
+  when: item.zone not in (firewall_get_zones.stdout.split(" "))
+  with_items: '{{ firewall_zones }}'
+
+- name: Setup firewall ports
+  firewalld:
+    zone: '{{ item.0.zone }}'
+    port: '{{ item.1 }}'
+    state: '{% if item.0.allow is defined and item.0.allow %}enabled{% else %}disabled{% endif %}'
+    permanent: true
+  with_subelements:
+    - '{{ firewall_zones }}'
+    - ports
+    - skip_missing: yes
+  notify:
+    - reload firewall
+
+- name: Setup firewall services
+  firewalld:
+    zone: '{{ item.0.zone }}'
+    service: '{{ item.1 }}'
+    state: '{% if item.0.allow is defined and item.0.allow %}enabled{% else %}disabled{% endif %}'
+    permanent: true
+  with_subelements:
+    - '{{ firewall_zones }}'
+    - services
+    - skip_missing: yes
+  notify:
+    - reload firewall
+
+- name: Setup firewall sources
+  firewalld:
+    zone: '{{ item.0.zone }}'
+    source: '{{ item.1 }}'
+    state: '{% if item.0.allow is defined and item.0.allow %}enabled{% else %}disabled{% endif %}'
+    permanent: true
+  with_subelements:
+    - '{{ firewall_zones }}'
+    - sources
+    - skip_missing: yes
+  notify:
+    - reload firewall
