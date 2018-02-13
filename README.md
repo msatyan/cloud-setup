@@ -1,7 +1,7 @@
-# cloud-init
+# init-cloud
 Cloud VM deployment palybooks
 
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/k8s-community/cluster-deploy/issues)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/openprovider/init-cloud/issues)
 
 ## Requirements
 
@@ -39,19 +39,30 @@ It should be auto generated during the creating of VM inctances
 cloud_inventory_file: '{{ inventory_dir }}/hosts'
 ```
 
-Account name of remote user. Ansible will use this user account to ssh into
+Account name of user who initialize VM. Ansible will use this user account to ssh into
 the managed machines. The user must be able to use sudo without asking for password
 ```yaml
-cloud_ssh_superuser: devops
+cloud_ssh_superuser: initcloud
 ```
 
-Account names of remote users. The users must be able to use sudo without asking
+List of users who can able to connect via ssh. The users must be able to use sudo without asking
 for password for some utils e.g. (tcpdump, docker)
 ```yaml
 cloud_ssh_users:
-  - names: dev
+  - name: devops
+    admin: true
+  - name: dev
     sudoers:
       - /usr/bin/docker
+      - /usr/bin/ls
+      - /usr/bin/cat
+      - /usr/bin/grep
+  - name: ops
+    sudoers:
+      - /usr/bin/docker
+      - /usr/bin/ls
+      - /usr/bin/cat
+      - /usr/bin/grep
       - /usr/bin/tcpdump
 ```
 
@@ -107,7 +118,7 @@ Thank you for your understanding!
 
 ## License
 
-[MIT Public License](https://github.com/openprovider/cloud-init/blob/master/LICENSE)
+[MIT Public License](https://github.com/openprovider/init-cloud/blob/master/LICENSE)
 
 ## Author Information
 

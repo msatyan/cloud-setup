@@ -2,17 +2,29 @@
 # It should be auto generated during the creating of VM inctances
 cloud_inventory_file: '{{ inventory_dir }}/hosts'
 
-# Account name of remote user. Ansible will use this user account to ssh into
-# the managed machines. The user must be able to use sudo without asking
-# for password
-cloud_ssh_superuser: devops
+# Account name of user who initialize VM.
+# Ansible will use this user account to ssh into the managed machines.
+# The user must be able to use sudo without asking for password
+cloud_ssh_superuser: initcloud
 
-# Account names of remote users. The users must be able to use sudo without asking
+# List of users who can able to connect via ssh.
+# The users must be able to use sudo without asking
 # for password for some utils e.g. (tcpdump, docker)
 cloud_ssh_user:
-  - names: dev
+  - name: devops
+    admin: true
+  - name: dev
     sudoers:
       - /usr/bin/docker
+      - /usr/bin/ls
+      - /usr/bin/cat
+      - /usr/bin/grep
+  - name: ops
+    sudoers:
+      - /usr/bin/docker
+      - /usr/bin/ls
+      - /usr/bin/cat
+      - /usr/bin/grep
       - /usr/bin/tcpdump
 
 # List of IPs which allowed to connect via ssh
