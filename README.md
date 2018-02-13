@@ -84,7 +84,7 @@ cloud_ops_superuser: devops
 List of users who can able to manage system and develop software.
 The users must be able to use sudo without asking for password for some utils e.g. (tcpdump, docker)
 
-Example of setup ssh users:
+Example of setup operations an dev users:
 ```yaml
 cloud_ops_users:
   - name: devops
