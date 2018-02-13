@@ -5,21 +5,29 @@ cloud_inventory_file: '{{ inventory_dir }}/hosts'
 # Account name of user who initialize VM.
 # Ansible will use this user account to ssh into the managed machines.
 # The user must be able to use sudo without asking for password
-cloud_ssh_superuser: initcloud
+cloud_ssh_superuser: devops
 
 # List of users who can able to connect via ssh.
 # The users must be able to use sudo without asking
 # for password for some utils e.g. (tcpdump, docker)
-cloud_ssh_user:
+cloud_ssh_users:
   - name: devops
     admin: true
+    bashrc:
+      - alias la='ls -la'
+      - alias l='ls -rtFla'
   - name: dev
+    home: /var/web
+    bashrc:
+      - alias la='ls -la'
     sudoers:
       - /usr/bin/docker
       - /usr/bin/ls
       - /usr/bin/cat
       - /usr/bin/grep
   - name: ops
+    bashrc:
+      - alias la='ls -la'
     sudoers:
       - /usr/bin/docker
       - /usr/bin/ls
@@ -28,7 +36,7 @@ cloud_ssh_user:
       - /usr/bin/tcpdump
 
 # List of IPs which allowed to connect via ssh
-cloud_ssh_allowed_ips: {}
+cloud_ssh_allowed_ips: []
 
 # List of groups with VM instance names and machine types
 # Instance groups let you organize VM instances or use them

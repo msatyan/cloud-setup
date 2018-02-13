@@ -31,4 +31,4 @@
 #       - /usr/bin/cat
 #       - /usr/bin/grep
 #       - /usr/bin/tcpdump
-users_data: {}
+users_data: []

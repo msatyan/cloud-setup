@@ -1,7 +1,7 @@
-# init-cloud
-Cloud VM deployment palybooks
+# cloud-setup
+Cloud VM setup palybooks
 
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/openprovider/init-cloud/issues)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/openprovider/cloud-setup/issues)
 
 ## Requirements
 
@@ -42,7 +42,7 @@ cloud_inventory_file: '{{ inventory_dir }}/hosts'
 Account name of user who initialize VM. Ansible will use this user account to ssh into
 the managed machines. The user must be able to use sudo without asking for password
 ```yaml
-cloud_ssh_superuser: initcloud
+cloud_ssh_superuser: devops
 ```
 
 List of users who can able to connect via ssh. The users must be able to use sudo without asking
@@ -76,7 +76,7 @@ cloud_ssh_users:
 
 List of IPs which allowed to connect via ssh
 ```yaml
-cloud_ssh_allowed_ips: {}
+cloud_ssh_allowed_ips: []
 ```
 
 List of groups with VM instance names and machine types
@@ -126,7 +126,7 @@ Thank you for your understanding!
 
 ## License
 
-[MIT Public License](https://github.com/openprovider/init-cloud/blob/master/LICENSE)
+[MIT Public License](https://github.com/openprovider/cloud-setup/blob/master/LICENSE)
 
 ## Author Information
 

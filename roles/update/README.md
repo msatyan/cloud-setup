@@ -3,7 +3,7 @@ Ansible Role: Update OS
 
 This role update VM instance on Cloudstack/Google/Amazone.
 
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/k8s-community/cluster-deploy/issues)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/openprovider/cloud-setup/issues)
 
 Requirements
 ------------
@@ -20,7 +20,7 @@ Example Playbook
 ----------------
 
     - hosts: all:!localhost
-      remote_user: initcloud
+      remote_user: devops
       become: true
 
       roles:

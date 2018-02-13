@@ -3,7 +3,7 @@ Ansible Role: SSH Permissions
 
 This role setup allowed ssh users for specified hosts.
 
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/k8s-community/cluster-deploy/issues)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/openprovider/cloud-setup/issues)
 
 Requirements
 ------------
@@ -17,14 +17,14 @@ Available variables are listed below, along with default values (see `defaults/m
 
 Add ssh access for specified users and allowed hosts
 ```yaml
-addmission_group: {}
+addmission_group: []
 ```
 
 Example Playbook
 ----------------
 
     - hosts: all:!localhost
-      remote_user: initcloud
+      remote_user: devops
       become: true
 
       roles:

@@ -14,7 +14,7 @@ instance_provider: gce
 # A list of instance node names.
 # Names must start with a lowercase letter followed by up to 63 lowercase letters,
 # numbers, or hyphens, and cannot end with a hyphen
-instance_nodes: {}
+instance_nodes: []
 #  - node-001
 #  - node-002
 
@@ -35,7 +35,7 @@ instance_image: centos-7
 # ----------------------------
 
 # User data or metadata that specified additional cloud configuration
-instance_metadata: {}
+instance_metadata: []
 
 # ----------------------------
 # Cloudstack specific defaults
