@@ -76,7 +76,7 @@ cloud_ssh_users:
 
 List of IPs which allowed to connect via ssh
 ```yaml
-cloud_ssh_allowed_ips: []
+cloud_ops_allowed_ips: []
 ```
 
 List of groups with VM instance names and machine types

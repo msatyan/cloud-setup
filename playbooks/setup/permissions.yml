@@ -7,7 +7,7 @@
     - role: permissions
       addmission_group:
         - name: '{{ cloud_ssh_superuser }}'
-          ips: '{{ cloud_ssh_allowed_ips }}'
+          ips: '{{ cloud_ops_allowed_ips }}'
 
   tasks:
 
@@ -17,7 +17,7 @@
       vars:
         addmission_group:
           - name: '{{ cloud_ssh_user.name }}'
-            ips: '{{ cloud_ssh_allowed_ips }}'
+            ips: '{{ cloud_ops_allowed_ips }}'
       with_items: '{{ cloud_ssh_users }}'
       loop_control:
         loop_var: cloud_ssh_user
