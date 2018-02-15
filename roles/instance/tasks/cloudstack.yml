@@ -29,7 +29,7 @@
 - lineinfile:
     dest: '{{ cloud_inventory_file }}'
     insertafter: "^\\[{{ instance_provider }}\\]" 
-    line: '{{ item.display_name }} ansible_host={{ item.default_ip  }}'
+    line: '{{ item.display_name }}.{{ instance_domain }} ansible_host={{ item.default_ip  }}'
   with_items: '{{ cloudstack_state.results | default([], true) }}'
   notify:
     - remove localhost
