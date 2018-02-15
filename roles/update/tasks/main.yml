@@ -1,6 +1,10 @@
 ---
 # tasks file for update
 
+- name: Setup SystemD journal 
+  shell: install -d -g systemd-journal /var/log/journal && systemctl restart systemd-journald
+  when: ansible_distribution == 'CentOS'
+
 - name: Update CentOS packages
   yum:
     name: '*'
