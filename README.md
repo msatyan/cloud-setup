@@ -51,26 +51,24 @@ Example of setup cloud providers:
 cloud_providers:
   - name: gce
     zone: europe-west1-b
-    domain: cluster-dev.net
     type: n1-standard-1
     image: centos-7
     metadata:
       ssh_key: keydata
       timezone: Europe/Amsterdam
     nodes:
-      - node-101
-      - node-102
+      - node-101.cluster-dev.net
+      - node-102.cluster-stage.net
   - name: aws
     zone: eu-west-1a
-    domain: cluster-dev.net
     type: t2.medium
     image: centos-7
     metadata:
       ssh_key: keydata
       timezone: Europe/Amsterdam
     nodes:
-      - node-201
-      - node-202
+      - node-201.cluster-dev.net
+      - node-202.cluster-stage.net
 ```
 
 Account name of user who initialize VM. Ansible will use this user account to ssh into

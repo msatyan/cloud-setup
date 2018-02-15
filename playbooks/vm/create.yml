@@ -24,7 +24,6 @@
         instance_provider: '{{ cloud_provider.name }}'
         instance_nodes: '{{ cloud_provider.nodes }}'
         instance_zone: '{{ cloud_provider.zone }}'
-        instance_domain: '{{ cloud_provider.domain }}'
         instance_type: '{{ cloud_provider.type }}'
         instance_image: '{{ cloud_provider.image }}'
         instance_metadata: '{{ cloud_provider.metadata }}'

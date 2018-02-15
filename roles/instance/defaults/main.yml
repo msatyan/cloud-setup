@@ -5,9 +5,6 @@
 # It should be auto generated during the creating of VM inctances
 cloud_inventory_file: '{{ inventory_dir }}/hosts'
 
-# It will be used as DNS discovering.
-instance_domain: cluster-dev.net
-
 # Default instance provider (Google Compute Engine)
 instance_provider: gce
 
