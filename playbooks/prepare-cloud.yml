@@ -1,2 +1,1 @@
 - import_playbook: vm/create.yml
-- import_playbook: vm/update.yml
