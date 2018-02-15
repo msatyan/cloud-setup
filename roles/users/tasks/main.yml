@@ -4,6 +4,7 @@
 - name: Create groups
   group:
     name: '{{ item.name }}'
+  when: item.create is not defined or item.create
   with_items: '{{ users_data }}'
 
 - name: Create users
@@ -12,6 +13,7 @@
     group: '{{ item.name }}'
     groups: '{{ item.name }}{% if item.admin is defined and item.admin %},wheel{% endif %}'
     generate_ssh_key: yes
+  when: item.create is not defined or item.create
   with_items: '{{ users_data }}'
 
 - name: Setup home directory
@@ -44,4 +46,5 @@
     dest: '{% if item.home is defined and item.home != "" %}{{ item.home }}{% else %}/home/{{ item.name }}{% endif %}/.bashrc'
     regexp: "^PS1="
     line: 'PS1="\n\[\e[32;1m\](\[\e[36;1m\]\t\[\e[32;1m\])-(\[\e[37;1m\]\u @ \H\[\e[32;1m\])-(\[\e[33;1m\]\w\[\e[32;1m\])\n$ \[\e[0m\]"'
+  when: item.homeless is not defined or not item.homeless
   with_items: '{{ users_data }}'

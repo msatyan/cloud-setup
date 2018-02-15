@@ -55,6 +55,12 @@ Example Playbook
                 - /usr/bin/cat
                 - /usr/bin/grep
                 - /usr/bin/tcpdump
+            - name: zabbix
+              homeless: true
+              create: false
+              sudoers:
+                - "/usr/sbin/iptables -nL"
+                - "/usr/sbin/conntrack -L"
 
 License
 -------

@@ -110,6 +110,12 @@ cloud_ops_users:
       - /usr/bin/cat
       - /usr/bin/grep
       - /usr/bin/tcpdump
+  - name: zabbix
+    homeless: true
+    create: false
+    sudoers:
+      - "/usr/sbin/iptables -nL"
+      - "/usr/sbin/conntrack -L"
 ```
 
 List of IPs which allowed to connect via ssh.
