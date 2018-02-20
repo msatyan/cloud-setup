@@ -1,0 +1,28 @@
+---
+# tasks file for chrony
+
+- name: Uninstall ntpd
+  yum:
+    name: ntp
+    state: absent
+  when: ansible_distribution == 'CentOS'
+
+- name: Install chronyd
+  yum:
+    name: chrony
+    state: present
+  notify:
+    - enable chronyd
+    - restart chronyd
+  when: ansible_distribution == 'CentOS'
+
+- name: Add ntp servers
+  lineinfile:
+    dest: /etc/chrony.conf
+    regexp: '^server {{ item }} iburst'
+    line: 'server {{ item }} iburst'
+    insertafter: '^# Please consider joining the pool'
+  with_items: '{{ chrony_ntp_servers }}'
+  when: chrony_ntp_servers | count > 0
+  notify:
+    - restart chronyd

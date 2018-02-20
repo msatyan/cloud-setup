@@ -1,0 +1,5 @@
+---
+# defaults file for chrony
+
+# List of NTP servers which can be used as a time source
+chrony_ntp_servers: []

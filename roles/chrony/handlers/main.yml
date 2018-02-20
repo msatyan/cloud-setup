@@ -1,0 +1,12 @@
+---
+# handlers file for chrony
+
+- name: enable chronyd
+  service:
+    name: chronyd
+    enabled: yes
+
+- name: restart chronyd
+  service:
+    name: chronyd
+    state: restarted
