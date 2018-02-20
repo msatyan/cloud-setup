@@ -2,3 +2,4 @@
 - import_playbook: setup/firewall.yml
 - import_playbook: setup/permissions.yml
 - import_playbook: setup/users.yml
+- import_playbook: setup/ntp.yml

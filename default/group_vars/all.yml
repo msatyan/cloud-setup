@@ -99,3 +99,6 @@ cloud_ops_allowed_ips: []
 #       - https
 #       - ssh
 cloud_services_access: []
+
+# List of NTP servers which can be used as a time source
+cloud_ntp_servers: []

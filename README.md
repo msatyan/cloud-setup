@@ -149,6 +149,11 @@ cloud_services_access:
       - ssh
 ```
 
+List of NTP servers which can be used as a time source.
+```yaml
+cloud_ntp_servers: []
+```
+
 ## Users and services credentials
 
 TODO
