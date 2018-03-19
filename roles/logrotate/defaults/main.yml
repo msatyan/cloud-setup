@@ -8,7 +8,7 @@ syslog_path: /etc/logrotate.d/syslog
 rotate_period: daily
 
 # Logs are stored for <rotate_count> periods
-rotate_count: 3
+rotate_count: 7
 
 # If the log file is missing, go on to the next one without issuing an error message.
 missingok: true
