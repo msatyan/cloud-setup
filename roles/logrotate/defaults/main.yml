@@ -4,9 +4,11 @@
 logrotate_config_path: /etc/logrotate.conf
 syslog_path: /etc/logrotate.d/syslog
 
-# Log files are rotated <rotate_period_type>, every <rotate_period>
-rotate_period_type: daily
-rotate_period: 3
+# Log files are rotated <rotate_period>
+rotate_period: daily
+
+# Logs are stored for <rotate_count> periods
+rotate_count: 3
 
 # If the log file is missing, go on to the next one without issuing an error message.
 missingok: true

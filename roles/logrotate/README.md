@@ -24,8 +24,8 @@ Example Playbook
 
       roles:
         - role: logrotate
-          rotate_period_type: weekly
-          rotate_period: 1
+          rotate_period: weekly
+          rotate_count: 1
 
 License
 -------

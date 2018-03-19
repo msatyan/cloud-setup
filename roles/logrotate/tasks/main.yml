@@ -3,20 +3,20 @@
 - name: Install logrotate (if it's absent)
   yum: name=logrotate state=present
 
-- name: Set period for syslog rotation
+- name: Set period count for syslog rotation
   lineinfile:
     dest: '{{ syslog_path }}'
     regexp: '^\s*rotate'
-    line: '    rotate {{ rotate_period }}'
+    line: '    rotate {{ rotate_count }}'
     insertafter: '^{'
   notify:
     - apply logrotate configs
 
-- name: Set period type for syslog rotation
+- name: Set period for syslog rotation
   lineinfile:
     dest: '{{ syslog_path }}'
     regexp: '^\s*hourly|daily|weekly|monthly|yearly'
-    line: '    {{ rotate_period_type }}'
+    line: '    {{ rotate_period }}'
     insertafter: '^{'
   notify:
     - apply logrotate configs
