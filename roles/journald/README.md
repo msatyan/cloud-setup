@@ -1,7 +1,7 @@
-Ansible Role: Setup journald
+Ansible Role: Setup configs for journald
 ============================
 
-This role setup journald.
+This role setup configs for journald.
 
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/openprovider/cloud-setup/issues)
 

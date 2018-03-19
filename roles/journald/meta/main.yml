@@ -1,6 +1,6 @@
 galaxy_info:
   author: Openprovider Authors
-  description: Setup journald
+  description: Setup configs for journald
   company: Openprovider
 
   # If the issue tracker for your role is not on github, uncomment the
