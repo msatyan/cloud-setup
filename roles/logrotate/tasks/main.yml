@@ -127,3 +127,11 @@
   when: size is defined and size != ""
   notify:
     - apply logrotate configs
+
+  - name: Set rsyslogd restart
+    lineinfile:
+      dest: '{{ syslog_path }}'
+      regexp: '/bin/kill -HUP'
+      line: '        /bin/kill -HUP `pgrep rsyslogd 2> /dev/null` 2> /dev/null || true'
+    notify:
+      - apply logrotate configs
