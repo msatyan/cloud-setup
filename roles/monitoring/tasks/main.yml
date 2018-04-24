@@ -1,0 +1,2 @@
+---
+- include: prometheus_node_exporter.yml

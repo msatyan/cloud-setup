@@ -1,0 +1,17 @@
+---
+# Prometheus repo configs for Node exporter
+prometheus_repo_name: prometheus
+prometheus_repo_description: Prometheus repository
+prometheus_repo_baseurl: 'https://packagecloud.io/prometheus-rpm/release/el/7/$basearch'
+prometheus_repo_gpgkey: |
+  https://packagecloud.io/prometheus-rpm/release/gpgkey
+  https://raw.githubusercontent.com/lest/prometheus-rpm/master/RPM-GPG-KEY-prometheus-rpm
+prometheus_repo_gpgcheck: 1
+prometheus_repo_enabled: 1
+prometheus_repo_sslverify: 1
+prometheus_repo_sslcacert: /etc/pki/tls/certs/ca-bundle.crt
+prometheus_repo_priority: 90
+prometheus_repo_metadata_expire: 300
+
+# Systemd configs path
+systemd_service_conf_path: /usr/lib/systemd/system
