@@ -1,0 +1,2 @@
+---
+- import_tasks: prometheus_node_exporter.yml

@@ -1,0 +1,32 @@
+- name: Add Prometheus repository
+  yum_repository:
+    name: '{{ prometheus_repo_name }}'
+    description: '{{ prometheus_repo_description  }}'
+    baseurl: '{{ prometheus_repo_baseurl }}'
+    gpgkey: '{{ prometheus_repo_gpgkey }}'
+    gpgcheck: '{{ prometheus_repo_gpgcheck }}'
+    enabled: '{{ prometheus_repo_enabled }}'
+    sslverify: '{{ prometheus_repo_sslverify }}'
+    sslcacert: '{{ prometheus_repo_sslcacert }}'
+    priority: '{{ prometheus_repo_priority }}'
+    metadata_expire: '{{ prometheus_repo_metadata_expire }}'
+
+- name: Install Node exporter
+  yum:
+    name: node_exporter
+    state: latest
+  notify:
+    - restart node_exporter
+
+- name: Set args for node_exporter service
+  template:
+    src: node_exporter.service.j2
+    dest: '{{ systemd_service_conf_path }}/node_exporter.service'
+  notify:
+    - reload system-daemon
+
+- name: Enable node_exporter service
+  service:
+    name: node_exporter
+    state: started
+    enabled: yes
