@@ -3,6 +3,6 @@
 localhost
 
 {% for item in cloud_providers %}
-[{{ item.name }}]
+[{{ item.group | default(item.name) }}]
 
 {% endfor %}
