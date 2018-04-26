@@ -1,2 +1,2 @@
 ---
-- include: prometheus_node_exporter.yml
+- import_tasks: prometheus_node_exporter.yml
