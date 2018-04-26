@@ -21,6 +21,7 @@
       include_role:
         name: instance
       vars:
+        instance_group: '{{ cloud_provider.group | default(cloud_provider.name) }}'
         instance_provider: '{{ cloud_provider.name }}'
         instance_nodes: '{{ cloud_provider.nodes }}'
         instance_zone: '{{ cloud_provider.zone }}'
