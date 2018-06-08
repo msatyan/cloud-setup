@@ -1,6 +1,41 @@
 ---
 # AWS instance provider tasks
 
+# TODO:
+#   fqdn: {{ item }}
+#   hostname: {{ item }}
+#   timezone: {{ instance_metadata["timezone"] | default("CET") }}
+
 - name: AWS - create VM
-  debug:
-    var: instance_provider
+  ec2:
+    # name: test-dns-v1
+    key_name: '{{ instance_metadata["ssh_key"] | default("superuser") }}'
+    instance_type: '{{ instance_type }}'
+    image: '{{ instance_image }}'
+    # https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region
+    ec2_url: 'https://ec2.{{ instance_zone }}.amazonaws.com'
+    aws_access_key: '{{ instance_metadata["access_key"] }}'
+    aws_secret_key: '{{ instance_metadata["secret_key"] }}'
+    wait: true
+    group: '{{ instance_metadata["security_group"] | default("default") }}'
+    count: '{{ instance_metadata["count"] | default (1) }}'
+    vpc_subnet_id: '{{ instance_metadata["subnet_id"] }}'
+    assign_public_ip: '{{ instance_metadata["assign_public_ip"] | default ("yes") }}'
+    instance_tags: { "Name" : '{{ instance_metadata["name"] }}' }
+    volumes: '{{ instance_metadata["volumes"] }}'
+  register: ec2_state
+  with_items: '{{ instance_nodes }}'
+
+- name: Wait for SSH to come up
+  wait_for:
+    host: '{{ item.instances[0].public_ip }}'
+    port: 22
+  with_items: '{{ ec2_state.results | default([], true) }}'
+
+- lineinfile:
+    dest: '{{ cloud_inventory_file }}'
+    insertafter: "^\\[{{ instance_provider }}\\]"
+    line: '{{ item.instances[0].public_dns_name }} ansible_host={{ item.instances[0].public_ip  }}'
+  with_items: '{{ ec2_state.results | default([], true) }}'
+  notify:
+    - remove localhost
