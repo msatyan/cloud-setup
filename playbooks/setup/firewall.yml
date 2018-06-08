@@ -6,3 +6,4 @@
   roles:
     - role: firewall
       firewall_zones: '{{ cloud_services_access }}'
+      when: cloud_services_access is defined and (cloud_services_access|length>0)
