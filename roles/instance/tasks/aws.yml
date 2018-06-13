@@ -32,10 +32,25 @@
     port: 22
   with_items: '{{ ec2_state.results | default([], true) }}'
 
+- name: Set hostname for VM instances
+  shell: hostnamectl set-hostname {{ item.item }}
+  delegate_to: '{{ item.instances[0].public_ip }}'
+  remote_user: '{{ cloud_ops_superuser }}'
+  become: true
+  with_items: '{{ ec2_state.results | default([], true) }}'
+
+- name: Set timezone
+  shell: timedatectl set-timezone  {{ instance_metadata["timezone"] }}
+  delegate_to: '{{ item.instances[0].public_ip }}'
+  remote_user: '{{ cloud_ops_superuser }}'
+  become: true
+  with_items: '{{ ec2_state.results | default([], true) }}'
+  when: '"timezone" in instance_metadata'
+
 - lineinfile:
     dest: '{{ cloud_inventory_file }}'
     insertafter: "^\\[{{ instance_provider }}\\]"
-    line: '{{ item.instances[0].public_dns_name }} ansible_host={{ item.instances[0].public_ip  }}'
+    line: '{{ item.item }} ansible_host={{ item.instances[0].public_ip  }}'
   with_items: '{{ ec2_state.results | default([], true) }}'
   notify:
     - remove localhost
