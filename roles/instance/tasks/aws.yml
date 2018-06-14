@@ -17,7 +17,7 @@
     aws_access_key: '{{ instance_metadata["access_key"] }}'
     aws_secret_key: '{{ instance_metadata["secret_key"] }}'
     wait: true
-    group: '{{ instance_metadata["security_group"] | default("default") }}'
+    group: '{{ instance_metadata["security_group"] | default([]) }}'
     count: '{{ instance_metadata["count"] | default (1) }}'
     vpc_subnet_id: '{{ instance_metadata["subnet_id"] }}'
     assign_public_ip: '{{ instance_metadata["assign_public_ip"] | default ("yes") }}'
